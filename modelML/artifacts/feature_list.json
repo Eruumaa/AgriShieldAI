@@ -1,0 +1,20 @@
+[
+  "Production",
+  "Exports",
+  "Imports",
+  "Population",
+  "Land_Area",
+  "Fertilizer",
+  "Import_Dependency_Ratio",
+  "Export_Ratio",
+  "Food_Availability_Index",
+  "Agricultural_Productivity",
+  "Production_Growth",
+  "Consumption_Growth",
+  "Self_Sufficiency_Ratio",
+  "Yield_Growth",
+  "Production_Stability_Index",
+  "Climate_Risk_Index",
+  "Fertilizer_Efficiency",
+  "Trade_Balance_Index"
+]
