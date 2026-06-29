@@ -11,6 +11,7 @@ import KPICard from '../components/ui/KPICard';
 import ChartCard from '../components/ui/ChartCard';
 import RiskBadge, { getRiskColor } from '../components/ui/RiskBadge';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
+import { useLanguage } from '../contexts/LanguageContext';
 import { fetchGlobalSummary, fetchFSRIData } from '../lib/api';
 
 const RISK_COLORS = {
@@ -37,6 +38,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 export default function HomePage() {
+  const { t } = useLanguage();
   const [summary, setSummary] = useState(null);
   const [fsriData, setFsriData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -47,7 +49,7 @@ export default function HomePage() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <LoadingSpinner text="Loading dashboard data..." />;
+  if (loading) return <LoadingSpinner text={t('ui.loading')} />;
 
   // KPI data
   const latestYear = summary?.years?.length ? Math.max(...summary.years) : 2013;
@@ -88,21 +90,21 @@ export default function HomePage() {
   return (
     <div>
       <div className="page-header">
-        <h1>Food Security Dashboard</h1>
-        <p>Global food security risk intelligence - powered by AI</p>
+        <h1>{t('home.title')}</h1>
+        <p>{t('home.subtitle')}</p>
       </div>
 
       {/* KPI Cards */}
       <div className="grid-row grid-cols-4" style={{ marginBottom: 24 }}>
-        <KPICard icon={Globe2} label="Total Countries" value={summary?.countries || 0} color="sky" trend={2.1} trendLabel="coverage" />
-        <KPICard icon={Wheat} label="Avg FSRI Score" value={summary?.average_fsri || 0} color="emerald" trend={-3.2} trendLabel="vs last year" />
-        <KPICard icon={AlertTriangle} label="High Risk Countries" value={highRiskCount} color="red" trend={1.5} trendLabel="vs last year" />
-        <KPICard icon={ShieldCheck} label="Latest Data Year" value={latestYear} color="purple" raw />
+        <KPICard icon={Globe2} label={t('ui.totalCountries')} value={summary?.countries || 0} color="sky" trend={2.1} trendLabel="coverage" />
+        <KPICard icon={Wheat} label={t('ui.avgRiskScore')} value={summary?.average_fsri || 0} color="emerald" trend={-3.2} trendLabel="vs last year" />
+        <KPICard icon={AlertTriangle} label={t('ui.highRiskCountries')} value={highRiskCount} color="red" trend={1.5} trendLabel="vs last year" />
+        <KPICard icon={ShieldCheck} label={t('ui.latestDataYear')} value={latestYear} color="purple" raw />
       </div>
 
       {/* Charts Row 1 */}
       <div className="grid-row grid-cols-2" style={{ marginBottom: 24 }}>
-        <ChartCard title="Risk Distribution" subtitle={`${latestYear} - ${latestData.length} countries`}>
+        <ChartCard title={t('home.riskDist')} subtitle={`${latestYear} - ${latestData.length} countries`}>
           <ResponsiveContainer width="100%" height={280}>
             <PieChart>
               <Pie
@@ -134,7 +136,7 @@ export default function HomePage() {
           </div>
         </ChartCard>
 
-        <ChartCard title="Average FSRI Trend" subtitle="Global average food security risk index">
+        <ChartCard title={t('home.avgTrend')} subtitle="Global average food security risk index">
           <ResponsiveContainer width="100%" height={280}>
             <LineChart data={avgByYear}>
               <defs>
@@ -155,7 +157,7 @@ export default function HomePage() {
 
       {/* Charts Row 2 */}
       <div className="grid-row grid-cols-2" style={{ marginBottom: 24 }}>
-        <ChartCard title="Top 10 Highest Risk Countries" subtitle={`Year ${latestYear}`}>
+        <ChartCard title={t('home.top10')} subtitle={`Year ${latestYear}`}>
           <ResponsiveContainer width="100%" height={340}>
             <BarChart data={topRisk} layout="vertical" margin={{ left: 10 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" horizontal={false} />
@@ -184,7 +186,7 @@ export default function HomePage() {
           </ResponsiveContainer>
         </ChartCard>
 
-        <ChartCard title="Risk Category Distribution by Year" subtitle="Countries per risk level across years">
+        <ChartCard title={t('home.catDist')} subtitle="Countries per risk level across years">
           <ResponsiveContainer width="100%" height={340}>
             <BarChart data={categoryByYear}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
@@ -200,17 +202,17 @@ export default function HomePage() {
       </div>
 
       {/* Recent data table */}
-      <ChartCard title="Country Risk Overview" subtitle={`Latest data - ${latestYear}`}>
+      <ChartCard title={t('home.countryOverview')} subtitle={`Latest data - ${latestYear}`}>
         <div style={{ overflowX: 'auto' }}>
           <table className="data-table">
             <thead>
               <tr>
-                <th>Country</th>
-                <th>FSRI Score</th>
-                <th>Risk Level</th>
-                <th>Production</th>
-                <th>Population (K)</th>
-                <th>Self-Sufficiency</th>
+                <th>{t('home.table.country')}</th>
+                <th>{t('home.table.score')}</th>
+                <th>{t('home.table.level')}</th>
+                <th>{t('home.table.production')}</th>
+                <th>{t('home.table.population')}</th>
+                <th>{t('home.table.selfSufficiency')}</th>
               </tr>
             </thead>
             <tbody>

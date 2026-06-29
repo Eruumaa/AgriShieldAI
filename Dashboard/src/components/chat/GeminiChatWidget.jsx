@@ -28,7 +28,7 @@ export default function GeminiChatWidget() {
     if (genAI && !chatSession) {
       try {
         const model = genAI.getGenerativeModel({
-          model: 'gemini-1.5-flash',
+          model: 'gemini-2.5-flash',
           systemInstruction: SYSTEM_INSTRUCTION,
         });
         setChatSession(model.startChat({ history: [] }));
@@ -76,7 +76,7 @@ export default function GeminiChatWidget() {
       console.error("Chat Error:", error);
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: 'Sorry, I encountered an error while processing your request. Please try again later.' 
+        content: `Sorry, I encountered an error: **${error.message}**` 
       }]);
     } finally {
       setIsLoading(false);

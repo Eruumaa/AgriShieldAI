@@ -70,7 +70,20 @@ export async function fetchCountryData(country) {
 export async function fetchFSRIData() {
   if (isSupabaseConfigured()) {
     const { data } = await supabase.from('fsri_data').select('*').order('country').order('year');
-    if (data) return data;
+    if (data) {
+      return data.map(r => ({
+        ...r,
+        Country: r.country,
+        Year: r.year,
+        FSRI: r.fsri,
+        FSRI_Category: r.fsri_category,
+        Production: r.production,
+        Population: r.population,
+        Self_Sufficiency_Ratio: r.self_sufficiency_ratio,
+        Food_Availability_Index: r.food_availability_index,
+        Production_Stability_Index: r.production_stability_index
+      }));
+    }
   }
   return mockData.fsriData;
 }
@@ -78,7 +91,17 @@ export async function fetchFSRIData() {
 export async function fetchCleanData() {
   if (isSupabaseConfigured()) {
     const { data } = await supabase.from('clean_data').select('*').order('country').order('year');
-    if (data) return data;
+    if (data) {
+      return data.map(r => ({
+        ...r,
+        Country: r.country,
+        Year: r.year,
+        Production: r.production,
+        Imports: r.imports,
+        Exports: r.exports,
+        Population: r.population
+      }));
+    }
   }
   return mockData.cleanData;
 }
@@ -86,7 +109,14 @@ export async function fetchCleanData() {
 export async function fetchFeatureData() {
   if (isSupabaseConfigured()) {
     const { data } = await supabase.from('feature_data').select('*').order('country').order('year');
-    if (data) return data;
+    if (data) {
+      return data.map(r => ({
+        ...r,
+        Country: r.country,
+        Year: r.year,
+        Yield_Growth: r.yield_growth
+      }));
+    }
   }
   return mockData.featureData;
 }

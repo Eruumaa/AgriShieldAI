@@ -10,6 +10,7 @@ import KPICard from '../components/ui/KPICard';
 import ChartCard from '../components/ui/ChartCard';
 import RiskBadge, { getRiskColor } from '../components/ui/RiskBadge';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
+import { useLanguage } from '../contexts/LanguageContext';
 import { fetchFSRIData, fetchCleanData } from '../lib/api';
 
 const CustomTooltip = ({ active, payload, label }) => {
@@ -28,6 +29,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 export default function CountryAnalyticsPage() {
+  const { t } = useLanguage();
   const [fsriData, setFsriData] = useState([]);
   const [cleanData, setCleanData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -76,7 +78,7 @@ export default function CountryAnalyticsPage() {
     Exports: r.Exports,
   }));
 
-  if (loading) return <LoadingSpinner text="Loading country analytics..." />;
+  if (loading) return <LoadingSpinner text={t('ui.loading')} />;
 
   const getSHAPExplanations = (latest, prev) => {
     const reasons = [];
@@ -96,8 +98,8 @@ export default function CountryAnalyticsPage() {
     <div>
       <div className="page-header" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
         <div>
-          <h1>Country Analytics</h1>
-          <p>Detailed food security analysis per country</p>
+          <h1>{t('analytics.title')}</h1>
+          <p>{t('analytics.subtitle')}</p>
         </div>
         <select
           className="filter-select"
@@ -114,33 +116,33 @@ export default function CountryAnalyticsPage() {
         <>
           {/* KPI Cards */}
           <div className="grid-row grid-cols-4" style={{ marginBottom: 24 }}>
-            <KPICard icon={ShieldAlert} label="Risk Score" value={latest.RiskScore} color={latest.RiskScore < 40 ? 'emerald' : latest.RiskScore < 60 ? 'amber' : 'red'}
+            <KPICard icon={ShieldAlert} label={t('home.table.score')} value={latest.RiskScore} color={latest.RiskScore < 40 ? 'emerald' : latest.RiskScore < 60 ? 'amber' : 'red'}
               trend={prev ? ((latest.RiskScore - prev.RiskScore) / prev.RiskScore * 100) : undefined} trendLabel="vs prior year" />
-            <KPICard icon={Factory} label="Production" value={latestClean?.Production || latest.Production} color="sky"
+            <KPICard icon={Factory} label={t('home.table.production')} value={latestClean?.Production || latest.Production} color="sky"
               trend={prev ? ((latest.Production - prev.Production) / prev.Production * 100) : undefined} />
-            <KPICard icon={Users} label="Population (K)" value={latest.Population} color="purple" />
-            <KPICard icon={Leaf} label="Self-Sufficiency" value={`${(latest.Self_Sufficiency_Ratio * 100).toFixed(1)}%`} color="emerald" />
+            <KPICard icon={Users} label={t('home.table.population')} value={latest.Population} color="purple" />
+            <KPICard icon={Leaf} label={t('home.table.selfSufficiency')} value={`${(latest.Self_Sufficiency_Ratio * 100).toFixed(1)}%`} color="emerald" />
           </div>
 
           {/* Explainable AI Section */}
-          <ChartCard title="Explainable AI (SHAP)" subtitle="Faktor penyebab tingkat risiko saat ini" style={{ marginBottom: 24, borderLeft: '4px solid var(--accent-sky)' }}>
+          <ChartCard title={t('analytics.shap')} subtitle={t('analytics.shapSub')} style={{ marginBottom: 24, borderLeft: '4px solid var(--accent-sky)' }}>
              <h3 style={{ fontSize: '1.1rem', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
-                Mengapa {selected} berstatus <RiskBadge category={latest.FSRI_Category} />?
+                {t('analytics.why')} {selected} {t('analytics.haveStatus')} <RiskBadge category={latest.FSRI_Category} />?
              </h3>
-             <p style={{ color: 'var(--text-secondary)', marginBottom: 8 }}>SHAP menjelaskan:</p>
+             <p style={{ color: 'var(--text-secondary)', marginBottom: 8 }}>{t('analytics.shapExplains')}</p>
              <ul style={{ paddingLeft: 24, color: 'var(--text-primary)' }}>
                {getSHAPExplanations(latest, prev).map((reason, i) => (
                  <li key={i} style={{ marginBottom: 4 }}>{reason}</li>
                ))}
              </ul>
              <div style={{ marginTop: 12, fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-               Jadi AI tidak menjadi black box.
+               {t('analytics.notBlackBox')}
              </div>
           </ChartCard>
 
           {/* Charts Row 1 */}
           <div className="grid-row grid-cols-2" style={{ marginBottom: 24 }}>
-            <ChartCard title="Risk Trend" subtitle={`${selected} - ${countryFSRI[0]?.Year} to ${latest.Year}`}>
+            <ChartCard title={t('analytics.riskTrend')} subtitle={`${selected} - ${countryFSRI[0]?.Year} to ${latest.Year}`}>
               <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={countryFSRI}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
@@ -153,7 +155,7 @@ export default function CountryAnalyticsPage() {
               </ResponsiveContainer>
             </ChartCard>
 
-            <ChartCard title="Country Profile" subtitle="Multi-dimensional food security assessment">
+            <ChartCard title={t('analytics.profile')} subtitle="Multi-dimensional food security assessment">
               <ResponsiveContainer width="100%" height={300}>
                 <RadarChart cx="50%" cy="50%" outerRadius="70%" data={radarData}>
                   <PolarGrid stroke="rgba(255,255,255,0.08)" />
@@ -166,7 +168,7 @@ export default function CountryAnalyticsPage() {
           </div>
 
           {/* Production / Trade chart */}
-          <ChartCard title="Production, Import & Export" subtitle={`${selected} - Historical trend`} style={{ marginBottom: 24 }}>
+          <ChartCard title={t('analytics.trade')} subtitle={`${selected} - Historical trend`} style={{ marginBottom: 24 }}>
             <ResponsiveContainer width="100%" height={320}>
               <BarChart data={tradeData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
@@ -182,17 +184,17 @@ export default function CountryAnalyticsPage() {
           </ChartCard>
 
           {/* Data table */}
-          <ChartCard title="Historical Data" subtitle="Year-by-year Risk records">
+          <ChartCard title={t('analytics.histData')} subtitle="Year-by-year Risk records">
             <div style={{ overflowX: 'auto' }}>
               <table className="data-table">
                 <thead>
                   <tr>
                     <th>Year</th>
-                    <th>Risk Score</th>
+                    <th>{t('home.table.score')}</th>
                     <th>Category</th>
-                    <th>Production</th>
-                    <th>Population</th>
-                    <th>Self-Sufficiency</th>
+                    <th>{t('home.table.production')}</th>
+                    <th>{t('home.table.population')}</th>
+                    <th>{t('home.table.selfSufficiency')}</th>
                     <th>Food Availability</th>
                   </tr>
                 </thead>
