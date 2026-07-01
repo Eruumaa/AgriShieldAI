@@ -191,3 +191,10 @@ CREATE POLICY "Public read clean_data" ON clean_data FOR SELECT USING (true);
 CREATE POLICY "Public read feature_data" ON feature_data FOR SELECT USING (true);
 CREATE POLICY "Public read countries" ON countries FOR SELECT USING (true);
 CREATE POLICY "Public read commodities" ON commodities FOR SELECT USING (true);
+
+-- Users Table Policies
+ALTER TABLE users ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Public insert users" ON users FOR INSERT WITH CHECK (true);
+CREATE POLICY "Public select users" ON users FOR SELECT USING (true);
+CREATE POLICY "Public update users" ON users FOR UPDATE USING (true);
+CREATE POLICY "Public delete users" ON users FOR DELETE USING (true);

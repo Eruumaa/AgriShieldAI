@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { Search, Bell, Menu, LogOut, Globe } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -12,6 +12,7 @@ const pageTitles = {
   '/recommendations': 'nav.recommendations',
   '/forecast': 'nav.forecast',
   '/reports': 'nav.reports',
+  '/profile': 'nav.profile',
   '/admin/users': 'nav.userManagement',
   '/admin/logs': 'nav.systemLogs',
 };
@@ -48,17 +49,19 @@ export default function TopBar({ onMenuClick }) {
         <button className="topbar-icon-btn" id="notifications-btn" title="Notifications">
           <Bell size={18} />
         </button>
-        <div
+        <Link
+          to="/profile"
           style={{
             width: 34, height: 34, borderRadius: 'var(--radius-md)',
             background: 'linear-gradient(135deg, var(--accent-emerald), var(--accent-sky))',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: '0.8rem', fontWeight: 700, color: '#060913', cursor: 'default',
+            fontSize: '0.8rem', fontWeight: 700, color: '#060913', cursor: 'pointer',
+            textDecoration: 'none'
           }}
           title={user?.name || "User"}
         >
           {initial}
-        </div>
+        </Link>
         <button className="topbar-icon-btn" onClick={logout} title="Logout" style={{ marginLeft: 4 }}>
           <LogOut size={16} style={{ color: 'var(--accent-red)' }} />
         </button>

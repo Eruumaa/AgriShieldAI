@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import {
   LayoutDashboard, Globe2, BarChart3, Wheat, BrainCircuit,
-  Lightbulb, TrendingUp, FileText, ChevronLeft, Shield, Users, Activity
+  Lightbulb, TrendingUp, FileText, ChevronLeft, Shield, Users, Activity, User
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -23,6 +23,8 @@ export default function Sidebar({ collapsed, onToggle }) {
     { to: '/forecast', icon: TrendingUp, label: 'nav.forecast' },
     { section: 'nav.export' },
     { to: '/reports', icon: FileText, label: 'nav.reports' },
+    { section: 'nav.account' },
+    { to: '/profile', icon: User, label: 'nav.profile' },
   ];
 
   if (isAdmin) {

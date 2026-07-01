@@ -14,6 +14,7 @@ const MLInsightsPage = lazy(() => import('./pages/MLInsightsPage'));
 const RecommendationPage = lazy(() => import('./pages/RecommendationPage'));
 const ForecastPage = lazy(() => import('./pages/ForecastPage'));
 const ReportsPage = lazy(() => import('./pages/ReportsPage'));
+const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 
 // Admin Pages
 const UserManagementPage = lazy(() => import('./pages/admin/UserManagementPage'));
@@ -48,6 +49,7 @@ export default function App() {
               <Route path="/recommendations" element={<Suspense fallback={<LoadingSpinner />}><RecommendationPage /></Suspense>} />
               <Route path="/forecast" element={<Suspense fallback={<LoadingSpinner />}><ForecastPage /></Suspense>} />
               <Route path="/reports" element={<Suspense fallback={<LoadingSpinner />}><ReportsPage /></Suspense>} />
+              <Route path="/profile" element={<Suspense fallback={<LoadingSpinner />}><ProfilePage /></Suspense>} />
               
               {/* Admin Routes */}
               <Route path="/admin/users" element={

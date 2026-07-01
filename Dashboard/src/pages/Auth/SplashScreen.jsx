@@ -35,7 +35,7 @@ export default function SplashScreen() {
       }
       navigate('/', { replace: true });
     } catch (err) {
-      setError('Invalid credentials. Please try again.');
+      setError(err.message || 'Authentication failed. Please try again.');
     } finally {
       setLoading(false);
     }
