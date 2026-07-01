@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { motion } from 'framer-motion';
+import utuVideo from '../assets/utu.mov';
+
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -123,25 +125,34 @@ export default function LandingPage() {
         textAlign: 'center',
         overflow: 'hidden'
       }}>
-        {/* Dynamic Animated Background */}
-        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}>
-          <div style={{ 
-            position: 'absolute', width: '60vw', height: '60vw', 
-            background: 'radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 60%)', 
-            top: '-20%', left: '-10%', 
-            animation: 'float-1 20s infinite ease-in-out' 
-          }} />
-          <div style={{ 
-            position: 'absolute', width: '50vw', height: '50vw', 
-            background: 'radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, transparent 60%)', 
-            bottom: '-10%', right: '-10%', 
-            animation: 'float-2 25s infinite ease-in-out' 
-          }} />
-          <div style={{ 
-            position: 'absolute', width: '40vw', height: '40vw', 
-            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 60%)', 
-            top: '40%', left: '30%', 
-            animation: 'float-3 22s infinite ease-in-out' 
+        {/* Background Video */}
+        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, overflow: 'hidden', pointerEvents: 'none' }}>
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              transform: 'translate(-50%, -50%)',
+            }}
+          >
+            <source src={utuVideo} type="video/quicktime" />
+            <source src={utuVideo} type="video/mp4" />
+          </video>
+          {/* Overlay to ensure text readability */}
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: 'linear-gradient(to bottom, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.95))',
           }} />
         </div>
 
