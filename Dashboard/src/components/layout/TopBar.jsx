@@ -27,7 +27,7 @@ export default function TopBar({ onMenuClick }) {
   return (
     <div className="topbar">
       <div className="topbar-left">
-        <button className="toggle-btn" onClick={onMenuClick} style={{ display: 'none' }} id="mobile-menu-btn">
+        <button className="toggle-btn" onClick={onMenuClick} id="mobile-menu-btn" style={{ display: 'flex' }}>
           <Menu size={20} />
         </button>
         <div className="breadcrumb">

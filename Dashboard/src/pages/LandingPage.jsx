@@ -17,7 +17,7 @@ export default function LandingPage() {
       overflowX: 'hidden'
     }}>
       {/* Navigation Bar */}
-      <nav style={{
+      <nav className="landing-nav" style={{
         position: 'fixed', top: 0, left: 0, width: '100%',
         padding: '20px 40px',
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
@@ -85,7 +85,7 @@ export default function LandingPage() {
       `}</style>
 
       {/* Hero Section */}
-      <section style={{
+      <section className="landing-hero" style={{
         minHeight: '100vh',
         display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
         position: 'relative',
@@ -125,7 +125,7 @@ export default function LandingPage() {
           <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: 600, margin: '0 auto 48px', lineHeight: 1.6 }}>
             {t('landing.hero.subtitle')}
           </p>
-          <div style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
+          <div className="landing-hero-buttons" style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
             <button onClick={() => navigate('/dashboard')} className="btn btn-primary" style={{ padding: '16px 32px', fontSize: '1.1rem', borderRadius: 999, boxShadow: '0 8px 30px rgba(16, 185, 129, 0.3)' }}>
               {t('landing.hero.btnPrimary')} <ArrowRight size={20} />
             </button>
@@ -154,7 +154,7 @@ export default function LandingPage() {
               <span style={{ fontSize: '0.8rem', color: 'var(--accent-red)' }}>{t('landing.card.critical')} (75%)</span>
             </div>
 
-            <div style={{ width: 1, height: 100, background: 'var(--border-subtle)', transform: 'translateZ(10px)' }} />
+            <div className="tilt-card-divider" style={{ background: 'var(--border-subtle)', transform: 'translateZ(10px)' }} />
 
             <div style={{ flex: 1, textAlign: 'left', transform: 'translateZ(30px)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
@@ -305,11 +305,11 @@ function TiltCard({ children }) {
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={{
-        background: 'rgba(30, 41, 59, 0.6)', backdropFilter: 'blur(20px)',
-        border: '1px solid rgba(255,255,255,0.1)', borderRadius: 24,
-        padding: 32, boxShadow: isHovering ? '0 40px 80px -15px rgba(16, 185, 129, 0.3)' : '0 30px 60px -15px rgba(0, 0, 0, 0.7)',
-        display: 'flex', gap: 24, alignItems: 'center', justifyContent: 'space-between',
+        className="tilt-card"
+        style={{
+          background: 'rgba(30, 41, 59, 0.6)', backdropFilter: 'blur(20px)',
+          border: '1px solid rgba(255,255,255,0.1)', borderRadius: 24,
+          padding: '32px', boxShadow: isHovering ? '0 40px 80px -15px rgba(16, 185, 129, 0.3)' : '0 30px 60px -15px rgba(0, 0, 0, 0.7)',
         transform: `perspective(1000px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) scale(${isHovering ? 1.02 : 1})`,
         transition: isHovering ? 'transform 0.1s ease-out, box-shadow 0.3s' : 'transform 0.5s ease-out, box-shadow 0.5s',
         cursor: 'pointer',
