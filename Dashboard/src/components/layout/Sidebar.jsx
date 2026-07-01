@@ -12,7 +12,7 @@ export default function Sidebar({ collapsed, onToggle }) {
 
   const navItems = [
     { section: 'nav.overview' },
-    { to: '/', icon: LayoutDashboard, label: 'nav.home' },
+    { to: '/dashboard', icon: LayoutDashboard, label: 'nav.home' },
     { to: '/global-risk-map', icon: Globe2, label: 'nav.globalRiskMap' },
     { section: 'nav.analytics' },
     { to: '/country-analytics', icon: BarChart3, label: 'nav.countryAnalytics' },

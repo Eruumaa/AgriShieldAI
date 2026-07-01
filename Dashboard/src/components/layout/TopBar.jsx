@@ -4,7 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 const pageTitles = {
-  '/': 'nav.home',
+  '/dashboard': 'nav.home',
   '/global-risk-map': 'nav.globalRiskMap',
   '/country-analytics': 'nav.countryAnalytics',
   '/commodity-analytics': 'nav.commodityAnalytics',
@@ -56,11 +56,16 @@ export default function TopBar({ onMenuClick }) {
             background: 'linear-gradient(135deg, var(--accent-emerald), var(--accent-sky))',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontSize: '0.8rem', fontWeight: 700, color: '#060913', cursor: 'pointer',
-            textDecoration: 'none'
+            textDecoration: 'none',
+            overflow: 'hidden'
           }}
           title={user?.name || "User"}
         >
-          {initial}
+          {user?.avatar_url ? (
+            <img src={user.avatar_url} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          ) : (
+            initial
+          )}
         </Link>
         <button className="topbar-icon-btn" onClick={logout} title="Logout" style={{ marginLeft: 4 }}>
           <LogOut size={16} style={{ color: 'var(--accent-red)' }} />

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { User, Mail, Shield, Key, Save, AlertCircle } from 'lucide-react';
+import { User, Mail, Shield, Key, Save, AlertCircle, Camera } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase, isSupabaseConfigured } from '../lib/supabaseClient';
 import ChartCard from '../components/ui/ChartCard';
@@ -11,6 +11,22 @@ export default function ProfilePage() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
+  const [avatarUrl, setAvatarUrl] = useState(user?.avatar_url || '');
+
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        setMessage({ type: 'error', text: 'Image must be less than 2MB' });
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setAvatarUrl(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
@@ -25,7 +41,7 @@ export default function ProfilePage() {
 
     try {
       if (isSupabaseConfigured() && user?.id) {
-        const updateData = { name };
+        const updateData = { name, avatar_url: avatarUrl };
         if (password) {
           updateData.password = password;
         }
@@ -39,7 +55,7 @@ export default function ProfilePage() {
       }
 
       // Update local storage session
-      const updatedUser = { ...user, name };
+      const updatedUser = { ...user, name, avatar_url: avatarUrl };
       setUser(updatedUser);
       localStorage.setItem('agrishield_session', JSON.stringify(updatedUser));
 
@@ -49,7 +65,7 @@ export default function ProfilePage() {
         const usersList = JSON.parse(storedUsers);
         const updatedList = usersList.map(u => {
           if (u.id === user.id || u.email === user.email) {
-            const up = { ...u, name };
+            const up = { ...u, name, avatar_url: avatarUrl };
             if (password) up.password = password;
             return up;
           }
@@ -100,15 +116,34 @@ export default function ProfilePage() {
         {/* Profile Card */}
         <ChartCard title="User Card">
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '16px 0' }}>
-            <div style={{
-              width: 90, height: 90, borderRadius: '50%',
-              background: 'linear-gradient(135deg, var(--accent-emerald), var(--accent-sky))',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '2.5rem', fontWeight: 800, color: '#060913',
-              marginBottom: 16,
-              boxShadow: '0 8px 24px rgba(16, 185, 129, 0.2)'
-            }}>
-              {initial}
+            <div style={{ position: 'relative', marginBottom: 16 }}>
+              <div style={{
+                width: 90, height: 90, borderRadius: '50%',
+                background: 'linear-gradient(135deg, var(--accent-emerald), var(--accent-sky))',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: '2.5rem', fontWeight: 800, color: '#060913',
+                boxShadow: '0 8px 24px rgba(16, 185, 129, 0.2)',
+                overflow: 'hidden',
+                position: 'relative'
+              }}>
+                {avatarUrl ? (
+                  <img src={avatarUrl} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                ) : (
+                  initial
+                )}
+              </div>
+              <label style={{
+                position: 'absolute', bottom: -5, right: -5,
+                width: 32, height: 32, background: 'var(--bg-secondary)',
+                border: '1px solid var(--border-subtle)', borderRadius: '50%',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                cursor: 'pointer', color: 'var(--text-primary)',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.5)',
+                transition: 'all 0.2s'
+              }} className="hover-scale">
+                <Camera size={16} />
+                <input type="file" accept="image/*" style={{ display: 'none' }} onChange={handleAvatarChange} />
+              </label>
             </div>
             <h3 style={{ fontSize: '1.2rem', margin: '0 0 4px 0', fontWeight: 700 }}>{user?.name}</h3>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: '0 0 16px 0' }}>{user?.email}</p>

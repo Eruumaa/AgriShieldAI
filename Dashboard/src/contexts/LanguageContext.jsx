@@ -75,7 +75,47 @@ const translations = {
     'analytics.histData': 'Historical Data',
     // Rules
     'rule.if': 'IF',
-    'rule.then': 'THEN'
+    'rule.then': 'THEN',
+    // Landing
+    'landing.hero.badge': 'Introducing Predictive Global Analytics',
+    'landing.hero.title1': 'Predict ',
+    'landing.hero.title2': 'Agricultural Risks',
+    'landing.hero.title3': ' Before They Happen',
+    'landing.hero.subtitle': 'Empowering governments and organizations with AI-driven insights to safeguard global food security against climate change and supply chain disruptions.',
+    'landing.hero.btnPrimary': 'Open Dashboard',
+    'landing.hero.btnSecondary': 'Learn More',
+    
+    'landing.problem.title': 'The Global Challenge',
+    'landing.problem.subtitle': 'Traditional methods are no longer sufficient to secure the food supply of tomorrow.',
+    'landing.problem.c1.title': 'Climate Volatility',
+    'landing.problem.c1.desc': 'Unpredictable weather patterns and extreme climate events devastate crop yields, causing billions in agricultural losses annually.',
+    'landing.problem.c2.title': 'Supply Chain Disruption',
+    'landing.problem.c2.desc': 'Geopolitical conflicts and logistical breakdowns sever food trade routes, creating catastrophic regional shortages.',
+    'landing.problem.c3.title': 'Data Fragmentation',
+    'landing.problem.c3.desc': 'Critical data is siloed across organizations. Without unified intelligence, policymakers are forced to make reactive decisions.',
+    
+    'landing.impact.title': 'Our Impact & Results',
+    'landing.impact.subtitle': 'AgriShield AI leverages advanced Machine Learning and FAO data to provide unparalleled accuracy in agricultural risk forecasting.',
+    'landing.impact.l1.title': '95% Prediction Accuracy',
+    'landing.impact.l1.desc': 'Our Random Forest models achieve industry-leading accuracy in forecasting production volatility.',
+    'landing.impact.l2.title': '50+ Countries Monitored',
+    'landing.impact.l2.desc': 'Real-time food security index tracking across major global agricultural producers.',
+    'landing.impact.l3.title': 'Actionable AI Recommendations',
+    'landing.impact.l3.desc': 'Automated Gemini LLM integration provides policy suggestions based on real-time data anomalies.',
+    'landing.impact.s1.val': '3M+',
+    'landing.impact.s1.lbl': 'Data Points Analyzed',
+    'landing.impact.s2.val': 'Tier 1',
+    'landing.impact.s2.lbl': 'FAO Data Integration',
+    
+    'landing.footer.title': 'Ready to secure the future?',
+    'landing.footer.btn': 'Create Free Account',
+
+    'landing.card.alert': 'Global Risk Alert',
+    'landing.card.alertTitle': 'Wheat Shortage Predicted',
+    'landing.card.critical': 'Critical Level',
+    'landing.card.reco': 'AI Recommendation',
+    'landing.card.recoTitle': 'Increase Reserves',
+    'landing.card.confidence': 'Confidence'
   },
   id: {
     // Nav
@@ -149,7 +189,47 @@ const translations = {
     'analytics.histData': 'Data Historis',
     // Rules
     'rule.if': 'JIKA',
-    'rule.then': 'MAKA'
+    'rule.then': 'MAKA',
+    // Landing
+    'landing.hero.badge': 'Memperkenalkan Analitik Global Prediktif',
+    'landing.hero.title1': 'Prediksi ',
+    'landing.hero.title2': 'Risiko Pertanian',
+    'landing.hero.title3': ' Sebelum Terjadi',
+    'landing.hero.subtitle': 'Memberdayakan pemerintah dan organisasi dengan wawasan AI untuk menjaga ketahanan pangan global dari perubahan iklim dan gangguan rantai pasokan.',
+    'landing.hero.btnPrimary': 'Buka Dashboard',
+    'landing.hero.btnSecondary': 'Pelajari Lebih Lanjut',
+    
+    'landing.problem.title': 'Tantangan Global',
+    'landing.problem.subtitle': 'Metode tradisional tidak lagi cukup untuk mengamankan pasokan pangan masa depan.',
+    'landing.problem.c1.title': 'Volatilitas Iklim',
+    'landing.problem.c1.desc': 'Pola cuaca tak menentu dan kejadian ekstrem menghancurkan hasil panen, menyebabkan kerugian miliaran dolar setiap tahun.',
+    'landing.problem.c2.title': 'Gangguan Rantai Pasokan',
+    'landing.problem.c2.desc': 'Konflik geopolitik dan masalah logistik memutus rute perdagangan pangan, memicu kelangkaan regional.',
+    'landing.problem.c3.title': 'Fragmentasi Data',
+    'landing.problem.c3.desc': 'Data penting terpencar di berbagai organisasi. Tanpa intelijen terpadu, pembuat kebijakan hanya bisa merespons secara reaktif.',
+    
+    'landing.impact.title': 'Dampak & Hasil Kami',
+    'landing.impact.subtitle': 'AgriShield AI memanfaatkan Machine Learning dan data FAO untuk memberikan akurasi prediksi risiko pertanian yang tak tertandingi.',
+    'landing.impact.l1.title': 'Akurasi Prediksi 95%',
+    'landing.impact.l1.desc': 'Model Random Forest kami mencapai akurasi terdepan dalam memprakirakan volatilitas produksi pangan.',
+    'landing.impact.l2.title': 'Pemantauan 50+ Negara',
+    'landing.impact.l2.desc': 'Pelacakan indeks ketahanan pangan secara real-time di seluruh produsen pertanian utama dunia.',
+    'landing.impact.l3.title': 'Rekomendasi AI Terukur',
+    'landing.impact.l3.desc': 'Integrasi LLM Gemini otomatis memberikan saran kebijakan berdasarkan anomali data.',
+    'landing.impact.s1.val': '3 Juta+',
+    'landing.impact.s1.lbl': 'Titik Data Dianalisis',
+    'landing.impact.s2.val': 'Tier 1',
+    'landing.impact.s2.lbl': 'Integrasi Data FAO',
+    
+    'landing.footer.title': 'Siap mengamankan masa depan?',
+    'landing.footer.btn': 'Buat Akun Gratis',
+
+    'landing.card.alert': 'Peringatan Risiko Global',
+    'landing.card.alertTitle': 'Krisis Gandum Diprediksi',
+    'landing.card.critical': 'Tingkat Kritis',
+    'landing.card.reco': 'Rekomendasi AI',
+    'landing.card.recoTitle': 'Tingkatkan Cadangan',
+    'landing.card.confidence': 'Tingkat Keyakinan'
   }
 };
 
@@ -170,7 +250,7 @@ export function LanguageProvider({ children }) {
   };
 
   const t = (key) => {
-    return translations[lang][key] || key;
+    return translations[lang][key] || translations['en'][key] || key;
   };
 
   return (

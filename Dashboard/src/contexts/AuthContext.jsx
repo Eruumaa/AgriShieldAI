@@ -87,6 +87,7 @@ export function AuthProvider({ children }) {
             name: matchedUser.name,
             email: matchedUser.email,
             role: matchedUser.role,
+            avatar_url: matchedUser.avatar_url || null,
             status: 'Active',
             lastLogin: 'Just now'
           };
@@ -170,6 +171,7 @@ export function AuthProvider({ children }) {
             name: data[0].name,
             email: data[0].email,
             role: data[0].role,
+            avatar_url: data[0].avatar_url || null,
             status: 'Active',
             lastLogin: 'Just now'
           };

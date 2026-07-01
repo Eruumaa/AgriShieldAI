@@ -6,6 +6,7 @@ import DashboardLayout from './components/layout/DashboardLayout';
 import LoadingSpinner from './components/ui/LoadingSpinner';
 import SplashScreen from './pages/Auth/SplashScreen';
 
+const LandingPage = lazy(() => import('./pages/LandingPage'));
 const HomePage = lazy(() => import('./pages/HomePage'));
 const GlobalRiskMapPage = lazy(() => import('./pages/GlobalRiskMapPage'));
 const CountryAnalyticsPage = lazy(() => import('./pages/CountryAnalyticsPage'));
@@ -34,14 +35,17 @@ export default function App() {
       <LanguageProvider>
         <BrowserRouter>
           <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Suspense fallback={<LoadingSpinner />}><LandingPage /></Suspense>} />
             <Route path="/login" element={<SplashScreen />} />
             
+            {/* Protected Dashboard Routes */}
             <Route element={
               <ProtectedRoute>
                 <DashboardLayout />
               </ProtectedRoute>
             }>
-              <Route path="/" element={<Suspense fallback={<LoadingSpinner />}><HomePage /></Suspense>} />
+              <Route path="/dashboard" element={<Suspense fallback={<LoadingSpinner />}><HomePage /></Suspense>} />
               <Route path="/global-risk-map" element={<Suspense fallback={<LoadingSpinner />}><GlobalRiskMapPage /></Suspense>} />
               <Route path="/country-analytics" element={<Suspense fallback={<LoadingSpinner />}><CountryAnalyticsPage /></Suspense>} />
               <Route path="/commodity-analytics" element={<Suspense fallback={<LoadingSpinner />}><CommodityAnalyticsPage /></Suspense>} />
