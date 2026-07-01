@@ -41,7 +41,7 @@ export default function Sidebar({ collapsed, onToggle }) {
         <div style={{ width: 36, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
           <img src="/logo.svg" alt="Logo" style={{ width: 28, height: 28 }} />
         </div>
-        <span className="sidebar-title" style={{ fontSize: '1.05rem', fontWeight: 700, whiteSpace: 'nowrap', transition: 'opacity 0.2s', opacity: collapsed ? 0 : 1 }}>
+        <span className="sidebar-title" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: 'italic', fontSize: '1.15rem', fontWeight: 700, whiteSpace: 'nowrap', transition: 'opacity 0.2s', opacity: collapsed ? 0 : 1 }}>
           AgriShield AI
         </span>
       </div>

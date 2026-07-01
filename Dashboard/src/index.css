@@ -73,7 +73,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
@@ -118,14 +118,16 @@ a:hover {
 
 /* ---------- Typography ---------- */
 h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
   color: var(--text-heading);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.25;
+  letter-spacing: -0.02em;
 }
 
-h1 { font-size: 1.875rem; letter-spacing: -0.025em; }
-h2 { font-size: 1.5rem; letter-spacing: -0.02em; }
-h3 { font-size: 1.125rem; letter-spacing: -0.01em; }
+h1 { font-size: 1.875rem; font-style: italic; }
+h2 { font-size: 1.5rem; font-style: italic; }
+h3 { font-size: 1.125rem; }
 h4 { font-size: 1rem; }
 
 /* ---------- Card ---------- */
@@ -214,9 +216,10 @@ h4 { font-size: 1rem; }
 }
 
 .kpi-card .kpi-value {
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: 2rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   line-height: 1;
 }
 
@@ -252,9 +255,12 @@ h4 { font-size: 1rem; }
 }
 
 .chart-card .chart-title {
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-style: italic;
   color: var(--text-heading);
+  letter-spacing: -0.02em;
 }
 
 .chart-card .chart-subtitle {
